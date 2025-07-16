@@ -24,7 +24,7 @@ public class AlunoDAO {
             st.setString(2, email);
             st.executeUpdate();
 
-            System.out.println("Aluno adicionado com sucesso!");
+
 
         } catch (SQLException e) {
             e.printStackTrace();
