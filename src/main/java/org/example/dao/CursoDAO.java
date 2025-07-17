@@ -50,28 +50,43 @@ public class CursoDAO {
             List<String> alunos = new ArrayList<>();
 
             while (resultT.next()) {
+
                 String nomeC = resultT.getString("curso_nome");
                 String nomeA = resultT.getString("aluno_nome");
 
+
                 if (estadoCurso == null) {
                     estadoCurso = nomeC;
+
                 }
 
                 if (!nomeC.equals(estadoCurso)) {
+
+
                     lista.add("Curso: " + estadoCurso);
+                    // lista com nome dos cursos
+
                     lista.addAll(alunos);
+                    // lista de alunos associados aos cursos
+
                     lista.add("---------------");
                     alunos.clear();
+
                     estadoCurso = nomeC;
+
                 }
 
                 alunos.add(" - " + nomeA);
             }
 
-            // add ultimo curso
+
             if (estadoCurso != null) {
+
                 lista.add("Curso: " + estadoCurso);
+                // último curso que apareceu
+
                 lista.addAll(alunos);
+                // alunos relacionados aos cursos da lista
             }
 
         } catch (SQLException e) {
@@ -79,12 +94,13 @@ public class CursoDAO {
         }
 
         return lista;
+// retorna a lista geral
+
     }
 
 
 
-
-    public List<String> listarCursosSemAlunos() {
+        public List<String> listarCursosSemAlunos() {
         List<String> lista = new ArrayList<>();
         String sql = "SELECT c.* FROM curso c LEFT JOIN matricula m ON c.id = m.curso_id WHERE m.aluno_id IS NULL ";
 
